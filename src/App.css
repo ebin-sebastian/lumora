@@ -59,7 +59,7 @@ h1 {
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
   gap: 30px;
   max-width: 1200px;
   margin: 0 auto;
@@ -75,7 +75,22 @@ h1 {
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
-  cursor: pointer;
+  cursor: pointer; 
+
+  opacity: 0; /* Hide it initially so it can fade in */
+  animation: floatUp 1.8s cubic-bezier(0.2, 1.8, 0.2, 1) forwards; /* Apply floatUp animation */
+}
+
+/* animation for the cards */
+@keyframes floatUp {
+  0% { 
+    opacity: 0; 
+    transform: translateY(30px) scale(0.95); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0) scale(1); 
+  }
 }
 
 .card:hover {
@@ -158,4 +173,45 @@ h1 {
   font-size: 2rem;
   cursor: pointer;
   z-index: 10;
+}
+
+
+/* --- BUTTON GROUP --- */
+.action-buttons {
+  margin-top: 25px;
+  display: flex;
+  gap: 15px; /* Space between buttons */
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: transform 0.2s, background 0.2s;
+}
+
+.btn:active {
+  transform: scale(0.95); /* Click effect */
+}
+
+/* Blue Button */
+.btn.primary {
+  background: #0a84ff;
+  color: white;
+}
+.btn.primary:hover {
+  background: #0071e3;
+}
+
+/* Gray Glass Button */
+.btn.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #f5f5f7;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.btn.secondary:hover {
+  background: rgba(255, 255, 255, 0.2);
 }

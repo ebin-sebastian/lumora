@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './App.css'
+import ImageCard from './components/ImageCard.jsx';
 
 const artData = [
   {
@@ -44,6 +45,19 @@ function App() {
     }
   }
 
+  const downloadImage = () => {
+    if (selectedImg) {
+      // Create a temporary link element
+      const link = document.createElement('a');
+      link.href = selectedImg.src;
+      // Name the file based on the art title
+      link.download = `AI-Art-${selectedImg.title.replace(/\s+/g, '-')}.jpg`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
   return (
    <div className="app-container">
       <header>
@@ -53,14 +67,13 @@ function App() {
 
       {/* DYNAMIC GALLERY */}
       <section className="gallery">
-        {artData.map((art) => (
-          <div key={art.id} className="card" onClick ={()=> setSelectedImg(art)} > 
-            <img src={art.src} alt={art.title} className="card-image" />
-            <div className="card-info">
-              <div className="card-title">{art.title}</div>
-              <div className="card-prompt">{art.prompt}</div>
-            </div>
-          </div>
+        {artData.map((art,index) => (
+          <ImageCard 
+            key={art.id}
+            art={art}
+            index={index}
+            onClick={() => setSelectedImg(art)}
+          />
         ))}
       </section>
 
@@ -78,6 +91,9 @@ function App() {
                 <button className='btn primary' onClick={copyPrompt}>
                   Copy Prompt
                 </button>
+                <button className="btn secondary" onClick={downloadImage}>
+                  Download Image
+                </button>
               </div>
             </div>
           </div>
@@ -85,6 +101,7 @@ function App() {
       )}
       
     </div>
+    
   )
 }
 
