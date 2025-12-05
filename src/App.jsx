@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import ImageCard from "./components/ImageCard.jsx";
 import Lightbox from "./components/Lightbox.jsx";
+import Header from "./components/Header.jsx";
 
 const artData = [
   {
@@ -43,13 +44,8 @@ function App() {
 
   return (
     <div className="app-container">
-      <header>
-        <h1>Lumora</h1>
-        <p className="subtitle">
-          Glow Up Your Ideas: AI Art Downloads & Prompt Blueprints.
-        </p>
-      </header>
-
+      
+      <Header />
       {/* DYNAMIC GALLERY */}
       <section className="gallery">
         {artData.map((art, index) => (
